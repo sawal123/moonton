@@ -16,14 +16,14 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+// Route::get('/', function () {
+//     return Inertia::render('Welcome', [
+//         'canLogin' => Route::has('login'),
+//         'canRegister' => Route::has('register'),
+//         'laravelVersion' => Application::VERSION,
+//         'phpVersion' => PHP_VERSION,
+//     ]);
+// });
 
 Route::get('admin', function(){
     return "Hi, Admin";
@@ -34,6 +34,14 @@ Route::get('user', function(){
     return "Hi, user";
 
 })->middleware('role:user');
+
+Route::redirect('/', '/login');
+
+Route::prefix('prototype')->group(function(){
+    Route::get('/login', function(){
+        return inertia::render('Prototype/Login');
+    });
+});
 
 
 
