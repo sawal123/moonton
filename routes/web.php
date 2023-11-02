@@ -37,10 +37,15 @@ Route::get('user', function(){
 
 Route::redirect('/', '/login');
 
-Route::prefix('prototype')->group(function(){
+Route::prefix('prototype')->name('prototype')->group(function(){
     Route::get('/login', function(){
         return inertia::render('Prototype/Login');
     });
+
+    Route::get('/register', function(){
+        // return inertia::render('Prototype/Register');
+        return "Hello";
+    })->name('.register');
 });
 
 

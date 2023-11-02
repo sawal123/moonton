@@ -1,4 +1,8 @@
-import Input from "@/Components/TextInput";
+import Input from "../../Components/TextInput";
+// import Input from "@/Components/TextInput";
+import Label from "@/Components/InputLabel";
+import Button from "@/Components/PrimaryButton";
+import { Link } from "@inertiajs/react";
 
 export default function Login() {
     return (
@@ -13,7 +17,7 @@ export default function Login() {
             <div className="py-24 flex laptopLg:ml-[680px] laptopXl:ml-[870px]">
                 <div>
                     <img src="/images/moonton-white.svg" alt="" />
-                    <div classNameName="my-[70px]">
+                    <div classNameName="" style={{ marginBottom: "50px" }}>
                         <div className="font-semibold text-[26px] mb-3">
                             Welcome Back
                         </div>
@@ -25,55 +29,55 @@ export default function Login() {
                     <form className="w-[370px]">
                         <div className="flex flex-col gap-6">
                             <div>
-                                <label className="text-base block mb-2">
-                                    Email Address
-                                </label>
-                                {/* <input type="email" name="email"
-                            className="rounded-2xl bg-form-bg py-[13px] px-7 w-full focus:outline-alerange focus:outline-none"
-                            placeholder="Email Address" /> */}
+                                <Label value="Email Address" pro className="" />
                                 <Input
                                     placeholder="Email Address"
                                     required="required"
                                     type="email"
-                                    value="Tes"
-                                    className="rounded-2xl bg-form-bg py-[13px] px-7 w-full focus:outline-alerange focus:outline-none"
-                                    
+                                    // value=""
+                                    defaultValue=""
+                                    autoComplete=""
+                                    className=" focus:outline-alerange focus:outline-none"
                                 />
                             </div>
                             <div>
                                 <label className="text-base block mb-2">
                                     Password
                                 </label>
-                                <input
+                                <Input
                                     type="password"
                                     name="password"
-                                    className="rounded-2xl bg-form-bg py-[13px] px-7 w-full focus:outline-alerange focus:outline-none"
+                                    autoComplete=""
+                                    className=" focus:outline-alerange focus:outline-none"
                                     placeholder="Password"
                                 />
                             </div>
                         </div>
                         <div className="grid space-y-[14px] mt-[30px]">
-                            <a
+                            {/* <a
                                 href="/"
                                 className="rounded-2xl bg-alerange py-[13px] text-center"
                             >
                                 <span className="text-base font-semibold">
                                     Start Watching
                                 </span>
-                            </a>
-                            <a
-                                href="sign_up.html"
-                                className="rounded-2xl border border-white py-[13px] text-center"
-                            >
-                                <span className="text-base text-white">
-                                    Create New Account
+                            </a> */}
+                            <Button type="button" variant="alerange">
+                                <span className="text-base font-semibold">
+                                    Start Watching
                                 </span>
-                            </a>
-                            {/* <button type="submit" className="rounded-2xl bg-alerange py-[13px] text-center">
-                        <span className="text-base font-semibold">
-                            Start Watching
-                        </span>
-                    </button> */}
+                            </Button>
+
+                            <Link href={route("prototype.register")}>
+                                <Button
+                                    type="button"
+                                    className="border border-white"
+                                >
+                                    <span className="text-base text-white">
+                                        Create New Account
+                                    </span>
+                                </Button>
+                            </Link>
                         </div>
                     </form>
                 </div>
