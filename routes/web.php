@@ -25,26 +25,23 @@ use Inertia\Inertia;
 //     ]);
 // });
 
-Route::get('admin', function(){
+Route::get('admin', function () {
     return "Hi, Admin";
-
 })->middleware('role:admin');
 
-Route::get('user', function(){
+Route::get('user', function () {
     return "Hi, user";
-
 })->middleware('role:user');
 
 Route::redirect('/', '/login');
 
-Route::prefix('prototype')->name('prototype')->group(function(){
-    Route::get('/login', function(){
+Route::prefix('prototype')->name('prototype')->group(function () {
+    Route::get('/login', function () {
         return inertia::render('Prototype/Login');
-    });
+    })->name('.login');
 
-    Route::get('/register', function(){
-        // return inertia::render('Prototype/Register');
-        return "Hello";
+    Route::get('/register', function () {
+        return inertia::render('Prototype/Register');
     })->name('.register');
 });
 
@@ -60,4 +57,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
