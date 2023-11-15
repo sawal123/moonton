@@ -44,7 +44,7 @@ Route::prefix('prototype')->name('prototype')->group(function () {
         return inertia::render('Prototype/Register');
     })->name('.register');
      Route::get('/dashboard', function () {
-        return inertia::render('Prototype/dashboard');
+        return inertia::render('Prototype/Dashboard');
     })->name('.dashboard');
 });
 
