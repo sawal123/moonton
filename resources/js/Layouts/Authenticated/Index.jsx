@@ -1,27 +1,27 @@
-import React from 'react'
-import Sidebar from './Sidebar'
-import Topbar from './Topbar'
-import { Head } from '@inertiajs/react'
+import React from "react";
+import Sidebar from "./Sidebar";
+import Topbar from "./Topbar";
+import { Head } from "@inertiajs/react";
 
-export default function Authenticated({children}) {
-  return (
-    <>
-    <Head title="Dashboard"/>
-       <div className="mx-auto max-w-screen hidden lg:block">
+export default function Authenticated({ children }) {
+    return (
+        <>
+            <Head title="Dashboard" />
+            <div className="mx-auto max-w-screen hidden lg:block">
                 {/*START: Sidebar */}
-                    <Sidebar />
+                <Sidebar />
                 {/*END: Sidebar */}
 
                 {/* START: Content */}
-                <div className="ml-[300px] px-[50px]">
-                    <div className="py-10 flex flex-col gap-[50px]">
-                        <main>
-                            {/* START: Topbar */}
-                            <Topbar />
-                            {/* END: Topbar */}
-                        </main>
+                    <div className="ml-[300px] px-[50px]">
+                        <div className="py-10 flex flex-col gap-[50px]">
+                           
+                                {/* START: Topbar */}
+                                <Topbar />
+                                {/* END: Topbar */}
+                                <main>{children}</main>
+                        </div>
                     </div>
-                </div>
                 {/* END: Content */}
             </div>
 
@@ -30,6 +30,6 @@ export default function Authenticated({children}) {
                     Sorry, this page only supported on 1024px screen or above
                 </div>
             </div>
-    </>
-  )
+        </>
+    );
 }
