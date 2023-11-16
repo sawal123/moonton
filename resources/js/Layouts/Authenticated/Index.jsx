@@ -1,9 +1,12 @@
 import React from 'react'
 import Sidebar from './Sidebar'
+import Topbar from './Topbar'
+import { Head } from '@inertiajs/react'
 
 export default function Authenticated({children}) {
   return (
     <>
+    <Head title="Dashboard"/>
        <div className="mx-auto max-w-screen hidden lg:block">
                 {/*START: Sidebar */}
                     <Sidebar />
@@ -14,6 +17,7 @@ export default function Authenticated({children}) {
                     <div className="py-10 flex flex-col gap-[50px]">
                         <main>
                             {/* START: Topbar */}
+                            <Topbar />
                             {/* END: Topbar */}
                         </main>
                     </div>
