@@ -17,7 +17,7 @@ export default function Authenticated({ children }) {
                         <div className="py-10 flex flex-col gap-[50px]">
                            
                                 {/* START: Topbar */}
-                                <Topbar />
+                                <Topbar   />
                                 {/* END: Topbar */}
                                 <main>{children}</main>
                         </div>

@@ -1,11 +1,20 @@
 import React from "react";
+import PropType from 'prop-types';
 
-export default function FeatureMovie() {
+FeatureMovie.prototype={
+    slug : PropType.string.isRequired,
+    name : PropType.string.isRequired,
+    category : PropType.string.isRequired,
+    thumbnail : PropType.string.isRequired,
+    rating : PropType.string.isRequired
+}
+
+export default function FeatureMovie({slug, name, category, rating, thumbnail}) {
     return (
         <>
             <div class="absolute overflow-hidden group mr-[30px]">
                 <img
-                    src="/images/featured-1.png"
+                    src={thumbnail}
                     class="object-cover rounded-[30px] w-[520px] h-[340px]"
                     alt=""
                 />
@@ -14,28 +23,28 @@ export default function FeatureMovie() {
                     <div class="p-[30px] flex items-center gap-1">
                         <img src="/icons/ic_star.svg" alt="" />
                         <span class="text-sm font-medium text-white mt-1">
-                            4.5/5.0
+                            {rating.toFixed(1)}/5.0
                         </span>
                     </div>
                 </div>
 
                 <div
-                    class="absolute bottom-0 h-[100px] left-0 right-0 bg-gradient-to-t from-black rounded-bl-[28px]
+                    class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black rounded-bl-[28px]
          rounded-br-[28px] flex justify-between items-center px-7 h-[130px]"
                 >
                     <div>
                         <div class="font-medium text-[22px] text-white">
-                            The Batman in Love
+                            {name}
                         </div>
                         <p class="mb-0 text-white text-sm font-light">
-                            Action • Horror
+                            {category}
                         </p>
                     </div>
                     <div class="translate-x-[100px] group-hover:translate-x-0 transition ease-in-out duration-500">
                         <img src="/icons/ic_play.svg" width="50" alt="" />
                     </div>
                 </div>
-                <a href="watching.html" class="inset-0 absolute z-50"></a>
+                <a href={slug} class="inset-0 absolute z-50"></a>
             </div>
         </>
     );

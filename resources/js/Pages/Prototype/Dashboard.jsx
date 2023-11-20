@@ -16,9 +16,11 @@ export default function Dashboard() {
     };
     return (
         <Authenticated>
-            
             <Head>
-                <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css" />
+                <link
+                    rel="stylesheet"
+                    href="https://unpkg.com/flickity@2/dist/flickity.min.css"
+                />
             </Head>
             <div>
                 <div class="font-semibold text-[22px] text-black mb-4">
@@ -26,7 +28,14 @@ export default function Dashboard() {
                 </div>
                 <Flickity class="gap-[30px]" options={flickityOptions}>
                     {[1, 2, 3, 4].map((i) => (
-                     <FeatureMovie />
+                        <FeatureMovie
+                            key={i}
+                            slug="the-batman-inlove"
+                            name={`The Batman In Love ${i}`}
+                            category="Action"
+                            rating={i + 1}
+                            thumbnail="https://imgsrv2.voi.id/w-lBQR8pIMKZSUBjJMWk3DB5Ad1MTdAr1Beb75E_iMw/auto/1200/675/sm/1/bG9jYWw6Ly8vcHVibGlzaGVycy8xNTMxMzMvMjAyMjA0MDMxNzMwLW1haW4uanBn.jpg"
+                        />
                     ))}
                 </Flickity>
             </div>
