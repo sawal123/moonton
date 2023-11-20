@@ -6,7 +6,7 @@ import { Head } from "@inertiajs/react";
 export default function Authenticated({ children }) {
     return (
         <>
-            <Head title="Dashboard" />
+         
             <div className="mx-auto max-w-screen hidden lg:block">
                 {/*START: Sidebar */}
                 <Sidebar />

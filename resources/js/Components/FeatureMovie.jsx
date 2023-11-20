@@ -6,7 +6,7 @@ FeatureMovie.prototype={
     name : PropType.string.isRequired,
     category : PropType.string.isRequired,
     thumbnail : PropType.string.isRequired,
-    rating : PropType.string.isRequired
+    rating : PropType.number
 }
 
 export default function FeatureMovie({slug, name, category, rating, thumbnail}) {
