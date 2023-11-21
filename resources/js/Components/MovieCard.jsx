@@ -1,21 +1,21 @@
 import React from "react";
 
-export default function MovieCard() {
+export default function MovieCard({slug, name, category, rating, thumbnail}) {
     return (
         <>
             <div className="absolute group overflow-hidden mr-[30px]">
                 <img
-                    src="/images/browse-1.png"
+                    src={thumbnail}
                     className="object-cover rounded-[30px] h-[340px] w-[250px]"
                     alt=""
                 />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black rounded-bl-[28px] rounded-br-[28px]">
                     <div className="px-7 pb-7">
                         <div className="font-medium text-xl text-white">
-                            Meong Golden
+                            {name}
                         </div>
                         <p className="mb-0 text-gray-300 text-base mt-[10px]">
-                            Horror • Love
+                            {category}
                         </p>
                     </div>
                 </div>
@@ -30,7 +30,7 @@ export default function MovieCard() {
                         alt=""
                     />
                 </div>
-                <a href="watching.html" className="inset-0 absolute z-50"></a>
+                <a href={slug} className="inset-0 absolute z-50"></a>
             </div>
         </>
     );

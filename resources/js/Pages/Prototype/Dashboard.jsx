@@ -49,7 +49,13 @@ export default function Dashboard() {
                 <div class="__scroll-selector"></div>
                 <Flickity class="gap-[30px]" options={flickityOptions}>
                     {[1, 2, 3, 4, 5, 6].map((i) => (
-                       <MovieCard key={i} />
+                       <MovieCard key={i}
+                       slug="the-batman-inlove"
+                       name={`The Batman In Love ${i}`}
+                       category="Action"
+                       rating={i + 1}
+                       thumbnail="/images/browse-1.png"
+                       />
                     ))}
                 </Flickity>
             </div>
