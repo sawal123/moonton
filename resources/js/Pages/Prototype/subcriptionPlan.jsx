@@ -25,7 +25,13 @@ export default function subcriptionPlan() {
                     />
 
                     {/* <!-- For Greatest --> */}
-                    <SubcritionCard isPremium />
+                    <SubcritionCard
+                        isPremium
+                        name="Premium"
+                        price={800000}
+                        durationInMonth={6}
+                        features={["Unlock 200 awards movies", "Feature 2", "Feature 3", "180 subtitles available"]}
+                    />
                 </div>
                 {/* <!-- /Pricing Card --> */}
             </div>

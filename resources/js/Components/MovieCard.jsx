@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "@inertiajs/react";
 
 export default function MovieCard({slug, name, category, rating, thumbnail}) {
     return (
@@ -30,7 +31,7 @@ export default function MovieCard({slug, name, category, rating, thumbnail}) {
                         alt=""
                     />
                 </div>
-                <a href={slug} className="inset-0 absolute z-50"></a>
+                <Link href={route("prototype.movie.show", slug)} className="inset-0 absolute z-50"></Link>
             </div>
         </>
     );
