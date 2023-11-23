@@ -1,16 +1,22 @@
 import React from "react";
-import PropType from 'prop-types';
+import PropType from "prop-types";
 import { Link } from "@inertiajs/react";
 
-FeatureMovie.prototype={
-    slug : PropType.string.isRequired,
-    name : PropType.string.isRequired,
-    category : PropType.string.isRequired,
-    thumbnail : PropType.string.isRequired,
-    rating : PropType.number
-}
+FeatureMovie.prototype = {
+    slug: PropType.string.isRequired,
+    name: PropType.string.isRequired,
+    category: PropType.string.isRequired,
+    thumbnail: PropType.string.isRequired,
+    rating: PropType.number,
+};
 
-export default function FeatureMovie({slug, name, category, rating, thumbnail}) {
+export default function FeatureMovie({
+    slug,
+    name,
+    category,
+    rating,
+    thumbnail,
+}) {
     return (
         <>
             <div class="absolute overflow-hidden group mr-[30px]">
@@ -44,7 +50,10 @@ export default function FeatureMovie({slug, name, category, rating, thumbnail}) 
                         <img src="/icons/ic_play.svg" width="50" alt="" />
                     </div>
                 </div>
-                <Link href={route("prototype.movie.show", slug)} class="inset-0 absolute z-50"></Link>
+                <Link
+                    href={route("prototype.movie.show", slug)}
+                    class="inset-0 absolute z-50"
+                ></Link>
             </div>
         </>
     );
