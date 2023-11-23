@@ -5,6 +5,7 @@ PrimaryButton.propTypes = {
     className: PropTypes.string,
     variant: PropTypes.oneOf([
         "primary",
+        "alerange",
         "warning",
         "danger",
         "light-outline",
