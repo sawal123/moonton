@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Application;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,10 @@ Route::get('user', function () {
 })->middleware('role:user');
 
 Route::redirect('/', '/login');
+
+Route::middleware(['auth', 'role:user'])->prefix('dashboard')->name('user.dashboard.')->group(function(){
+    Route::get('/', [DashboardController::class, 'index'])->name('index');
+});
 
 Route::prefix('prototype')->name('prototype')->group(function () {
     Route::get('/login', function () {
