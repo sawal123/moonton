@@ -28,6 +28,10 @@ class HandleInertiaRequests extends Middleware
      *
      * @return array<string, mixed>
      */
+        // private function activePlan(){
+        //     $activePlan = Auth
+        // }
+
     public function share(Request $request): array
     {
         return [
