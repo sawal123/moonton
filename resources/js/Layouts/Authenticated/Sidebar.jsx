@@ -3,7 +3,7 @@ import { Link } from "@inertiajs/react";
 import { prototype } from "flickity";
 import SubcriptionDetail from "./SubcriptionDetail";
 
-export default function Sidebar() {
+export default function Sidebar({ auth }) {
     return (
         <>
             <aside className="fixed z-50 w-[300px] h-full">
@@ -126,7 +126,7 @@ export default function Sidebar() {
                                         fill="#B7B7B7"
                                     />
                                 </svg>
-                                Analytics
+                                Analytics  {auth.activePlan.name}
                             </a>
                             <a href="#!" className="side-link">
                                 <svg
@@ -162,9 +162,16 @@ export default function Sidebar() {
                             </a>
                         </div>
 
-                       <SubcriptionDetail isPremium />
-
-                       
+                        {auth.activePlan && (
+                            <SubcriptionDetail
+                                name={auth.activePlan.name}
+                                isPremium={auth.activePlan.name === "Premium"}
+                                remainingActiveDays={
+                                    auth.activePlan.remainingActiveDays
+                                }
+                                activeDays={auth.activePlan.activeDays}
+                            />
+                        )}
                     </div>
                 </div>
             </aside>

@@ -5,11 +5,12 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use App\Models\UserSubcription;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 
 class User extends Authenticatable
@@ -57,6 +58,6 @@ class User extends Authenticatable
         return $dateNow->lessThanOrEqualTo($dateExpired);
     }
     public function LastActiveUserSubcription(){
-        return $this->hasOne(UserSubcription::class)->wherePaymentStatus('paid')->lastet();
+        return $this->hasOne(UserSubcription::class)->wherePaymentStatus('paid')->latest();
     }
 }

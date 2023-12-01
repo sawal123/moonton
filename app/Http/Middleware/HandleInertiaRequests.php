@@ -2,9 +2,13 @@
 
 namespace App\Http\Middleware;
 
-use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+// use Auth;
+use Carbon\Carbon;
+
 
 class HandleInertiaRequests extends Middleware
 {
@@ -26,11 +30,27 @@ class HandleInertiaRequests extends Middleware
     /**
      * Define the props that are shared by default.
      *
-     * @return array<string, mixed>
+     * @return array|null
      */
-        // private function activePlan(){
-        //     $activePlan = Auth
-        // }
+    private function activePlan()
+    {
+        $activePlan = Auth::user() ? Auth::user()->LastActiveUserSubcription : null;
+        // dd($activePlan);
+        if (!$activePlan) {
+            return null;
+        }
+        
+        $lastDay = Carbon::parse($activePlan->updated_at)->addMonths($activePlan->subcriptionPlan->active_period_in_months);
+        $activeDays = Carbon::parse($activePlan->updated_at)->diffInDays($lastDay);
+        $remainingActiveDays = Carbon::parse($activePlan->expired_date)->diffInDays(Carbon::now());    
+       
+        return[
+            'name'=> $activePlan->subcriptionPlan->name,
+            'remainingActiveDays' => $remainingActiveDays,
+            'activeDays'=> $activeDays,
+        ];
+
+    }
 
     public function share(Request $request): array
     {
@@ -38,6 +58,7 @@ class HandleInertiaRequests extends Middleware
             ...parent::share($request),
             'auth' => [
                 'user' => $request->user(),
+                'activePlan'=> $this->activePlan(),
             ],
             'ziggy' => fn () => [
                 ...(new Ziggy)->toArray(),
