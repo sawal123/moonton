@@ -1,13 +1,15 @@
 <?php
 
 use Inertia\Inertia;
+use App\Models\SubcriptionPlan;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\User\MovieController;
 use App\Http\Controllers\User\SubcriptionPlanController;
-use App\Models\SubcriptionPlan;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Admin\MovieController as AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,12 +41,19 @@ Route::get('user', function () {
 
 Route::redirect('/', '/login');
 
-Route::middleware(['auth', 'role:user'])->prefix('dashboard')->name('user.dashboard.')->group(function(){
+Route::middleware(['auth', 'role:user'])->prefix('dashboard')->name('user.dashboard.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('index');
-    Route::get('/movie/{movie:slug}', [MovieController::class, 'show'])->name('movie.show');
-    Route::get('/subcription-plan', [SubcriptionPlanController::class, 'index'])->name('subcriptionPlane.index');
-    Route::post('/subcription-plan/{subcriptionPlan}/user-subcribe', [SubcriptionPlanController::class, 'userSubcribe'])->name('subcriptionPlane.userSubcribe');
+    Route::get('/movie/{movie:slug}', [MovieController::class, 'show'])->name('movie.show')->middleware('checkUserSubcription:true');
+    Route::get('/subcription-plan', [SubcriptionPlanController::class, 'index'])->name('subcriptionPlane.index')->middleware('checkUserSubcription:false');
+    Route::post('/subcription-plan/{subcriptionPlan}/user-subcribe', [SubcriptionPlanController::class, 'userSubcribe'])->name('subcriptionPlane.userSubcribe')->middleware('checkUserSubcription:true');
 });
+
+Route::get('logout', [AuthenticatedSessionController::class, 'destroy'])
+    ->name('logout');
+
+    Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.dashboard.')->group(function () {
+        Route::resource('movie', AdminController::class);
+    });
 
 Route::prefix('prototype')->name('prototype')->group(function () {
     Route::get('/login', function () {
@@ -54,7 +63,7 @@ Route::prefix('prototype')->name('prototype')->group(function () {
     Route::get('/register', function () {
         return inertia::render('Prototype/Register');
     })->name('.register');
-     Route::get('/dashboard', function () {
+    Route::get('/dashboard', function () {
         return inertia::render('Prototype/Dashboard');
     })->name('.dashboard');
     Route::get('/subcriptionPlan', function () {

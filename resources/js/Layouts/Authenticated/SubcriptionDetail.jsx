@@ -49,7 +49,7 @@ export default function SubcriptionDetail({
                     <div className="text-white text-lg font-semibold mt-4 mb-8">
                         For Greatest
                     </div>
-                    <div className="text-white text-sm mb-2">12 of 30 hari</div>
+                    <div className="text-white text-sm mb-2">{remainingActiveDays} of {activeDays} hari</div>
                     <div className="rounded-full w-full h-[6px] bg-[#333333]">
                         <div className={`rounded-full h-full ${loadingProgress()} bg-alerange`}></div>
                     </div>

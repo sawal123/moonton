@@ -27,7 +27,7 @@ class SubcriptionPlanController extends Controller
             'subcription_plan_id' => $subcriptionPlan->id,
             'price' => $subcriptionPlan->price,
             'expired_date' => Carbon::now()->addMonths($subcriptionPlan->active_period_in_months),
-            'payment_status' => 'success'
+            'payment_status' => 'paid'
         ];
         $userSybcription = UserSubcription::create($data);
         return redirect(route('user.dashboard.index'));
