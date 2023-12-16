@@ -45,6 +45,7 @@ export default forwardRef(function TextInput(
             {...props}
             type={type}
             value={value}
+            handleChange={handleChange}
             defaultValue={defaultValue}
             className={`rounded-2xl bg-form-bg py-[13px] px-7 w-full ${isError} input-${variant}  ${className}`}
             ref={input}

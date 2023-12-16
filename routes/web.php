@@ -22,18 +22,9 @@ use App\Http\Controllers\Admin\MovieController as AdminController;
 |
 */
 
-// Route::get('/', function () {
-//     return Inertia::render('Welcome', [
-//         'canLogin' => Route::has('login'),
-//         'canRegister' => Route::has('register'),
-//         'laravelVersion' => Application::VERSION,
-//         'phpVersion' => PHP_VERSION,
-//     ]);
-// });
 
-Route::get('admin', function () {
-    return "Hi, Admin";
-})->middleware('role:admin');
+
+
 
 Route::get('user', function () {
     return "Hi, user";
@@ -48,12 +39,16 @@ Route::middleware(['auth', 'role:user'])->prefix('dashboard')->name('user.dashbo
     Route::post('/subcription-plan/{subcriptionPlan}/user-subcribe', [SubcriptionPlanController::class, 'userSubcribe'])->name('subcriptionPlane.userSubcribe')->middleware('checkUserSubcription:true');
 });
 
-Route::get('logout', [AuthenticatedSessionController::class, 'destroy'])
+Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
     ->name('logout');
 
-    Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.dashboard.')->group(function () {
-        Route::resource('movie', AdminController::class);
-    });
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.dashboard.')->group(function () {
+    Route::get('/', function () {
+        return "Hi, Admin";
+    })->middleware('role:admin');
+    Route::resource('movie', AdminController::class);
+    // Route::resource('movie/create', AdminController::class);
+});
 
 Route::prefix('prototype')->name('prototype')->group(function () {
     Route::get('/login', function () {

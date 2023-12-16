@@ -61,7 +61,7 @@ export default function Login() {
                                     <Label
                                         value="Email Address"
                                         pro={true.toString()}
-                                        className=""
+                                       
                                     />
                                     <Input
                                         placeholder="Email Address"
