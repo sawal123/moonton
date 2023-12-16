@@ -2,12 +2,13 @@
 
 namespace App\Http\Middleware;
 
+use Carbon\Carbon;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 // use Auth;
-use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 
 class HandleInertiaRequests extends Middleware
@@ -59,6 +60,10 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
                 'activePlan'=> $this->activePlan(),
+            ],
+            'flashMessage'=>[
+                'message'=> Session::get('message'),
+                'type'=> Session::get('type'),
             ],
             'ziggy' => fn () => [
                 ...(new Ziggy)->toArray(),

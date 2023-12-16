@@ -6,9 +6,9 @@
     @apply bg-yellow-500 text-white;
 }
 
-.btn-danger {
+/* .btn-danger {
     @apply bg-red-500 text-white;
-}
+} */
 
 .btn-light-outline {
     @apply text-white border border-white;

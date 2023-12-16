@@ -5,17 +5,12 @@ import Input from "@/Components/TextInput";
 import InputError from "@/Components/InputError";
 import Checkbox from "@/Components/Checkbox";
 import Button from "@/Components/PrimaryButton";
-
+import { router } from '@inertiajs/react'
 import { Head, Link, useForm } from "@inertiajs/react";
 
-export default function Create({ auth }) {
-    const { setData, post, processing, errors } = useForm({
-        name: "",
-        category: "",
-        video_url: "",
-        thumbnail: "",
-        rating: "",
-        is_featured: false,
+export default function Edit({ auth, movie }) {
+    const {data, setData, processing, errors } = useForm({
+        ...movie,
     });
 
     const onHandleChange = (e) => {
@@ -26,49 +21,64 @@ export default function Create({ auth }) {
     };
     const submit = (e) => {
         e.preventDefault();
-        post(route("admin.dashboard.movie.store"));
+        if (data.thumbnail === movie.thumbnail) {
+            delete data.thumbnail;
+        }
+        router.post(route("admin.dashboard.movie.update", movie.id), {
+            _method: 'put',
+            ...data,
+        });
     };
     return (
         <Authenticated auth={auth}>
-            <Head title="Admin - Create Movie" />
-            <h1 className="text-xl">Insert a new Movie</h1>
+            <Head title="Admin - Edit Movie" />
+            <h1 className="text-xl">Edit Movie {movie.name}</h1>
             <hr />
-           
+
             <form onSubmit={submit}>
                 <Label value="Name" className="mt-4" />
                 <Input
                     placeholder="Enter the name movie..."
                     type="text"
                     name="name"
+                    defaultValue={movie.name}
                     isFocused={true}
                     onChange={onHandleChange}
                     className=" border-alerange focus:outline-alerange  bg-white"
                     isError={errors.name}
                 />
-                 <InputError message={errors.name} className="mt-2" />
+                <InputError message={errors.name} className="mt-2" />
                 <Label value="Category" className="mt-4" />
                 <Input
                     placeholder="Enter the category movie..."
                     type="text"
                     name="category"
+                    defaultValue={movie.category}
                     isFocused={true}
                     onChange={onHandleChange}
                     className=" border-alerange focus:outline-alerange  bg-white"
                     isError={errors.category}
                 />
-                 <InputError message={errors.category} className="mt-2" />
+                <InputError message={errors.category} className="mt-2" />
                 <Label value="Video Url" className="mt-4" />
                 <Input
                     placeholder="Enter the url movie..."
                     type="url"
                     name="video_url"
+                    defaultValue={movie.video_url}
                     isFocused={true}
                     onChange={onHandleChange}
                     className=" border-alerange focus:outline-alerange  bg-white"
                     isError={errors.video_url}
                 />
-                 <InputError message={errors.video_url} className="mt-2" />
+                <InputError message={errors.video_url} className="mt-2" />
                 <Label value="Thumbnail" className="mt-4" />
+                <img
+                    src={`/storage/${movie.thumbnail}`}
+                    width={100}
+                    className="rounded-lg mb-2"
+                    alt=""
+                />
                 <Input
                     placeholder="Insert thumbnail of t he movie"
                     type="file"
@@ -77,18 +87,19 @@ export default function Create({ auth }) {
                     onChange={onHandleChange}
                     isError={errors.thumbnail}
                 />
-                 <InputError message={errors.thumbnail} className="mt-2" />
+                <InputError message={errors.thumbnail} className="mt-2" />
                 <Label value="Rating" className="mt-4" />
                 <Input
                     placeholder="Enter the rating the movie..."
                     type="number"
                     name="rating"
+                    defaultValue={movie.rating}
                     isFocused={true}
                     onChange={onHandleChange}
                     className=" border-alerange focus:outline-alerange  bg-white"
                     isError={errors.video_url}
                 />
-                 <InputError message={errors.rating} className="mt-2" />
+                <InputError message={errors.rating} className="mt-2" />
                 <div className="flex flex-row mt-4 items-center">
                     <Label
                         forInput="is_featured"
@@ -101,16 +112,16 @@ export default function Create({ auth }) {
                         onChange={(e) =>
                             setData("is_featured", e.target.checked)
                         }
+                        checked={movie.is_featured}
                     />
-                     
                 </div>
                 <Button
                     type="submit"
                     variant="alerange"
-                    className="mt-4 "
+                    className="mt-4 text-white"
                     processing={processing}
                 >
-                    Save
+                    Update
                 </Button>
             </form>
         </Authenticated>

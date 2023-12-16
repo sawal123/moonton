@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Movie;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\Admin\Movie\Store;
+use App\Http\Requests\Admin\Movie\Update;
 
 class MovieController extends Controller
 {
@@ -14,8 +18,11 @@ class MovieController extends Controller
     public function index()
     {
         //
+        $movie = Movie::withTrashed()->get();
 
-        return inertia('Admin/Movie/Index');
+        return inertia('Admin/Movie/Index',[
+            'movies' => $movie
+        ]);
     }
 
     /**
@@ -29,9 +36,15 @@ class MovieController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Store $request)
     {
-       return $request->all();
+
+        $data = $request->validated();
+        $data['thumbnail'] = Storage::disk('public')->put('movies', $request->file('thumbnail'));
+        $data['slug'] = Str::slug($data['name']);
+        $movie = Movie::create($data);
+
+        return redirect(route('admin.dashboard.movie.index'))->with(['message' => 'Movie Success Insert', 'type' => 'success']);
     }
 
     /**
@@ -47,15 +60,27 @@ class MovieController extends Controller
      */
     public function edit(Movie $movie)
     {
-        //
+        
+        return inertia('Admin/Movie/Edit', [
+            'movie' =>$movie
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Movie $movie)
+    public function update(Update $request, Movie $movie)
     {
-        //
+        $data = $request->validated();
+        if($request->file('thumbnail')){
+            $data['thumbnail'] = Storage::disk('public')->put('movies', $request->file('thumbnail'));
+            Storage::disk('public')->delete($movie->thumbnail);
+        }
+        $movie->update($data);
+        return redirect(route('admin.dashboard.movie.index'))->with([
+            'message'=> 'Movie Updated Succesfully',
+            'type'=> 'success'
+        ]);
     }
 
     /**
@@ -63,6 +88,18 @@ class MovieController extends Controller
      */
     public function destroy(Movie $movie)
     {
-        //
+        $movie->delete();
+        return redirect(route('admin.dashboard.movie.index'))->with([
+            'message'=> 'Movie Delete Succesfully',
+            'type'=> 'success'
+        ]);
+    }
+
+    public function restore($movie){
+        Movie::withTrashed()->find($movie)->restore();
+        return redirect(route('admin.dashboard.movie.index'))->with([
+            'message'=>'Movie Restored Succesfully',
+            'type'=> 'success'
+        ]);
     }
 }

@@ -47,6 +47,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.dashboar
         return "Hi, Admin";
     })->middleware('role:admin');
     Route::resource('movie', AdminController::class);
+    Route::put('movie/{movie}/restore', [AdminController::class, 'restore'])->name('movie.restore');
     // Route::resource('movie/create', AdminController::class);
 });
 
