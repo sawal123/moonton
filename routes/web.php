@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\MovieController as AdminController;
 
 
 
+Route::post('midtrans/notification', [SubcriptionPlanController::class, 'midtransCallback']);
 
 
 Route::get('user', function () {
