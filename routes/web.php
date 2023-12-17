@@ -36,8 +36,9 @@ Route::middleware(['auth', 'role:user'])->prefix('dashboard')->name('user.dashbo
     Route::get('/', [DashboardController::class, 'index'])->name('index');
     Route::get('/movie/{movie:slug}', [MovieController::class, 'show'])->name('movie.show')->middleware('checkUserSubcription:true');
     Route::get('/subcription-plan', [SubcriptionPlanController::class, 'index'])->name('subcriptionPlane.index')->middleware('checkUserSubcription:false');
-    Route::post('/subcription-plan/{subcriptionPlan}/user-subcribe', [SubcriptionPlanController::class, 'userSubcribe'])->name('subcriptionPlane.userSubcribe')->middleware('checkUserSubcription:true');
+    Route::post('/subcription-plan/{subcriptionPlan}/user-subcribe', [SubcriptionPlanController::class, 'userSubcribe'])->name('subcriptionPlane.userSubscribe');
 });
+// ->middleware('checkUserSubcription:true')
 
 Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
     ->name('logout');

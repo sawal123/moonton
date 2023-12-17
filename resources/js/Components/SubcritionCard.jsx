@@ -45,7 +45,7 @@ export default function SubcritionCard({
                     {/* <!-- Bottom: CTA Button --> */}
                     <div>
                         <Button onClick={onSelectSubcription}
-                            type="button"
+                            type="submit"
                             className="rounded-2xl border border-[#F1F1F1] py-[13px] text-center grid"
                             // variant="white-outline"
                         >
@@ -107,7 +107,7 @@ export default function SubcritionCard({
                     {/* <!-- Bottom: CTA Button --> */}
                     <div onClick={onSelectSubcription}>
                         <Button
-                            type="button"
+                            type="submit"
                             className="rounded-2xl bg-alerange py-[13px] text-center grid"
                         >
                             <span className="text-base font-semibold">

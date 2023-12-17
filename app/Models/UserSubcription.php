@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class UserSubcription extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $fillable = ['user_id', 'subcription_plan_id', 'price', 'expired_date', 'payment_status', 'snapToken'];
+    protected $fillable = ['user_id', 'subcription_plan_id', 'price', 'expired_date', 'payment_status', 'snap_token'];
 
     /**
      * Get the user that owns the UserSubcription
