@@ -11,7 +11,7 @@ class MovieController extends Controller
     public function show(Movie $movie)
     {
         return inertia('User/Dashboard/Movie/Show',[
-            'movie'=>$movie
+             'movie'=>$movie
         ]);
     }
 }

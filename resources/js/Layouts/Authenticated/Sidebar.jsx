@@ -31,7 +31,7 @@ export default function Sidebar({ auth }) {
 
                         <div>
                             <div className="text-gray-1 side-link mb-4">
-                                Others
+                                 Others
                             </div>
                             {userOthers.map((menu, index) => (
                                 <MenuItem
