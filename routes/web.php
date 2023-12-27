@@ -31,7 +31,7 @@ Route::get('user', function () {
     return "Hi, user";
 })->middleware('role:user');
 
-Route::redirect('/', '/login');
+Route::redirect('/',  [AuthenticatedSessionController::class, 'create'])->name('login');
 
 Route::middleware(['auth', 'role:user'])->prefix('dashboard')->name('user.dashboard.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('index');
